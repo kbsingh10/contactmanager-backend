@@ -6,7 +6,6 @@ pipeline {
         IMAGE_REPO = 'prengineering'
         IMAGE_NAME      = 'backend'
         IMAGE_TAG       = "${env.BUILD_NUMBER}" // Uses Jenkins build number as tag
-        
         // Python specific environment variables
         PIP_CACHE_DIR   = "${WORKSPACE}/.pip-cache"
     }
@@ -70,7 +69,7 @@ pipeline {
 
         stage('Docker build'){
             steps {
-                echo "building docker image"
+                echo 'building docker image'
                 sh "docker build -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} ."
                 sh "docker push ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
             }
@@ -84,13 +83,12 @@ pipeline {
                 //     docker.withRegistry("https://${DOCKER_REGISTRY}", 'docker-registry-credentials-id') {
                 //         def customImage = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
                 //         customImage.push()
-                        
                 //         // Also push a 'latest' tag if this is the main branch
                 //         if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'master') {
                 //             customImage.push('latest')
                 //         }
-                    }
-                }
+                //     }
+                // }
             }
         }
     }
