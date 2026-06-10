@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Define your Docker registry and image name
-        DOCKER_REGISTRY = 'prengineering'
+        IMAGE_REPO = 'prengineering'
         IMAGE_NAME      = 'backend'
         IMAGE_TAG       = "${env.BUILD_NUMBER}" // Uses Jenkins build number as tag
         
@@ -57,6 +57,25 @@ pipeline {
             }
         }
 
+        stage('Login to Docker Hub') {
+        steps {
+            withCredentials([usernamePassword(credentialsId: 'docker-login', 
+                                                usernameVariable: 'USERNAME', 
+                                                passwordVariable: 'PASSWORD')]) {
+                sh 'echo $PASSWORD | docker login -u $USERNAME --password-stdin'
+                echo 'Logged in successfully'
+                }
+            }
+        }
+
+        stage('Docker build'){
+            steps {
+                echo "building docker image"
+                sh "docker build -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} ."
+                sh "docker push ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
+            }
+        }
+
         stage('Package & Push') {
             steps {
                 echo 'Building Docker Image...'
@@ -74,6 +93,7 @@ pipeline {
                 }
             }
         }
+    }
 
     post {
         success {
@@ -85,3 +105,4 @@ pipeline {
             echo "Backend Build #${env.BUILD_NUMBER} failed. Check logs."
         }
     }
+}
