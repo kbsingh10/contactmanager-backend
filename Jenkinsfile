@@ -37,10 +37,10 @@ pipeline {
                 echo 'Running Flake8 Linting...'
                 sh '''
                     sleep 10
-                    // . venv/bin/activate
-                    // pip install flake8
-                    // flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-                    // flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+                    #. venv/bin/activate
+                    #pip install flake8
+                    #flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+                    #flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
                 '''
             }
         }
