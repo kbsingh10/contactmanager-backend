@@ -83,4 +83,3 @@ pipeline {
             echo "Backend Build #${env.BUILD_NUMBER} failed. Check logs."
         }
     }
-}
