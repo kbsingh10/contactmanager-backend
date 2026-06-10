@@ -1,4 +1,4 @@
-pipeline {
+pipeline{
     agent any
 
     environment {
@@ -11,13 +11,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                cleanWs()
-                checkout scm
-            }
-        }
-
         stage('Setup Environment') {
             steps {
                 echo 'Setting up Python Virtual Environment...'
