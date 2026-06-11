@@ -3,7 +3,7 @@ pipeline{
 
     environment {
         // Define your Docker registry and image name
-        IMAGE_REPO = 'prengineering'
+        IMAGE_REPO = 'kbsingh10'
         IMAGE_NAME      = 'backend'
         IMAGE_TAG       = "${env.BUILD_NUMBER}" // Uses Jenkins build number as tag
         // Python specific environment variables
