@@ -8,7 +8,7 @@ pipeline{
         IMAGE_TAG       = "${env.BUILD_NUMBER}" // Uses Jenkins build number as tag
         // Python specific environment variables
         PIP_CACHE_DIR   = "${WORKSPACE}/.pip-cache"
-        API_URL = "http://3.95.21.24:8000"
+        
     }
 
     stages {
