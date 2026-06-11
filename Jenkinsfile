@@ -8,6 +8,7 @@ pipeline{
         IMAGE_TAG       = "${env.BUILD_NUMBER}" // Uses Jenkins build number as tag
         // Python specific environment variables
         PIP_CACHE_DIR   = "${WORKSPACE}/.pip-cache"
+        API_URL = "http://3.95.21.24:8000"
     }
 
     stages {
@@ -63,7 +64,7 @@ pipeline{
         stage('Docker build'){
             steps {
                 echo 'building docker image'
-                sh "docker build -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} ."
+                sh "docker build --build-arg VITE_API_URL=$(API_URL) -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} ."
                 sh "docker push ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
