@@ -64,8 +64,9 @@ pipeline{
         stage('Docker build'){
             steps {
                 echo 'building docker image'
-                sh "docker build --build-arg VITE_API_URL=\$(API_URL) -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} ."
+                sh "docker build -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_REPO}/${IMAGE_NAME}:latest  ."
                 sh "docker push ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG}"
+                sh "docker push ${IMAGE_REPO}/${IMAGE_NAME}:latest"
             }
         }
 
